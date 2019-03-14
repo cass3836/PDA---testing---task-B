@@ -54,7 +54,12 @@ Calculator.prototype = {
         this.multiply(this.runningTotal);
         break;
         case ('/'):
+        if (this.runningTotal === 0){
+          this.runningTotal = "Not a number"
+        }
+        else {
         this.divide(this.runningTotal);
+        }
         break;
       }
     }

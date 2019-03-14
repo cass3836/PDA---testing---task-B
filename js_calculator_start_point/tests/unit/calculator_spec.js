@@ -30,10 +30,35 @@ describe('calculator', function () {
     calculator.divide(7)
     assert.equal(calculator.runningTotal, 3)
   })
-  //
-  // - `calculator.add()` - add 1 to 4 and get 5
-  // - `calculator.subtract()` subtract 4 from 7 and get 3
-  // - `calculator.multiply()` - multiply 3 by 5 and get 15
-  // - `calculator.divide()` - divide 21 by 7 and get 3
+
+// integration tests
+
+  it('should be able to concatenate a multiple number of button clicks', function(){
+    calculator.numberClick(6);
+    calculator.numberClick(9);
+    assert.equal(calculator.runningTotal, 69);
+  })
+
+  it('should be able to chain multiple operations together', function(){
+    calculator.numberClick(8);
+    calculator.operatorClick('+');
+    calculator.numberClick(9);
+    calculator.operatorClick('-');
+    calculator.numberClick(2);
+    calculator.operatorClick('=');
+    assert.equal(calculator.runningTotal, 15);
+  })
+
+  it('should be able to clear the running total without affecting the calculation', function(){
+    calculator.numberClick(8);
+    calculator.operatorClick('+');
+    calculator.numberClick(9);
+    calculator.operatorClick('-');
+    calculator.numberClick(2);
+    calculator.clearClick()
+    calculator.numberClick(3);
+    calculator.operatorClick('=');
+    assert.equal(calculator.runningTotal, 14);
+  })
 
 });
